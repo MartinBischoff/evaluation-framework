@@ -13,7 +13,7 @@ In Virtual Prototyping, (usually 3D) simulation models of e.g. mechatronic syste
 
 Both the **EvaluationParameters** and **ObjectiveValues** together define the complete **Evaluation Space**. The following GIF shows an example of possible **EvaluationParameters** and **ObjectiveValues** in the case of a simulation model of a plane.
 
-gif
+<img src="./assets/VP_example.gif" width="1000"/>
 
 Hence, in Virtual Prototyping, countless design alternatives, i.e. **EvaluationParameters**, of simulation models of mechatronic systems (or other products) are simulated and the specified decision criteria, i.e. **ObjectiveValues**, are used to evalute - and finally optimize - the performance of the respective product designs.
 
@@ -21,7 +21,7 @@ Hence, in Virtual Prototyping, countless design alternatives, i.e. **EvaluationP
 
 The Evaluation Framework realizes this idea of performing Virtual Prototyping through three distinct software components. All of these components can also be used individually:
 
-img
+<img src="./assets/framework_components.png/">
 
 * **Definition of Evaluation Space**: In Unity it is very easy to build physics simulations, and hence Unity serves as a great tool for simulation of mechatronic systems. The first component of the Evaluation Framework, i.e. [EvaluationFrameworkUnity](https://github.com/siemens/evaluation-framework/tree/master/Unity3D/EvaluationFrameworkUnity) [EvaluationFrameworkROSUnity](https://github.com/siemens/evaluation-framework/tree/master/Unity3D/EvaluationFrameworkROSUnity), is a Unity addon that allows users to intuitively and easily define **EvaluationParamters** and **ObjectiveValues** from any Unity simulation model. In the end, the specified **EvaluationSpace** is automatically saved into two .json-files and the Unity simulation is built into a standalone application (executable).
 * **Execution and Evaluation**: The second component of the Evaluation Framework is implemented as a .[NET](https://www.microsoft.com/net) solution in C\#, see [EvaluationFramework](https://github.com/siemens/evaluation-framework/tree/master/EvaluationFramework) and [EvaluationFrameworkROS](https://github.com/siemens/evaluation-framework/tree/master/EvaluationFrameworkROS). This component efficiently simulates the Unity project for all combinations of the previously defined **EvaluationParamters**. In other words, the .NET solution repeatedly calls the executable of the Unity simulation and performs a brute-force evaluation of the complete parameter space and retrieves the **ObjectiveValues** from the executable. In order to speed up this process, the underlying hardware is used to its maximum capacity, as one simulation can run per CPU core, thus parallelizing the brute-force evaluation. Finally, the results are stored in a table-formatted .txt-file containing all **EvaluationParameter** values and the corresponding **ObjectiveValue** results.
